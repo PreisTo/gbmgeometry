@@ -2,10 +2,8 @@ __author__ = "drjfunk"
 import numpy as np
 from astropy.coordinates import (
     SkyCoord,
-    get_sun,
     get_body,
     get_body_barycentric,
-    get_moon,
 )
 from spherical_geometry.polygon import SphericalPolygon
 import astropy.units as u
@@ -81,7 +79,7 @@ class GBMDetector(object):
         if self._time is not None:
             # we can calculate the sun position
             # in GCRS
-            tmp_sun = get_sun(self._time)
+            tmp_sun = get_body("sun",self._time)
             # in ICRS
             self._sun_position_icrs = SkyCoord(
                 tmp_sun.ra.deg,
@@ -261,7 +259,7 @@ class GBMDetector(object):
         """                                                                                                                                                                                                                                                                   
         :return: moon position as SkyCood object in icrs frame                                                                                                                                                                                                                
         """
-        tmp_moon = get_moon(self._time)
+        tmp_moon = get_body("moon",self._time)
         # in ICRS
         return SkyCoord(
             tmp_moon.ra.deg,

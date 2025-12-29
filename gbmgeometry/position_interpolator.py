@@ -6,7 +6,7 @@ import astropy.units as u
 import h5py
 import numpy as np
 import scipy.interpolate as interpolate
-from astropy.coordinates import get_body, get_moon, get_sun
+from astropy.coordinates import get_body
 
 from gbmgeometry.utils.gbm_time import GBMTime
 
@@ -247,7 +247,7 @@ class PositionInterpolator(object):
 
         """
 
-        return get_sun(self.astro_time(t))
+        return get_body("sun",self.astro_time(t))
 
     def moon_position(self, t):
         """
@@ -261,7 +261,7 @@ class PositionInterpolator(object):
 
         """
 
-        return get_moon(self.astro_time(t))
+        return get_body("moon",self.astro_time(t))
 
     def body_position(self, t, body="uranus"):
         """
